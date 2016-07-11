@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-ng-app="SAC">
+<head>
+	<base href="/SAC/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>Dike System's</title>
+	<link rel="stylesheet" href="_lib/third/bootstrap/css/bootstrap.min.css">
+	<link href="http://fonts.googleapis.com/css?family=Lato:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="_lib/third/toastr/toastr.min.css">
+</head>
+<body data-ng-controller="IndexController">
+
+	<div data-ng-view></div>
+
+	<script type="text/javascript" src="_lib/third/js/angularjs/angular.min.js"></script>
+	<script type="text/javascript" src="_lib/third/js/angularjs/angular-route.js"></script>
+	<script type="text/javascript" src="_lib/third/js/angularjs/angular-animate.js"></script>
+	<script type="text/javascript" src="_lib/third/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="_lib/third/toastr/toastr.min.js"></script>
+	<script type="text/javascript" src="_lib/third/js/angularui/mask.js"></script>
+	<script type="text/javascript" src="_lib/third/js/angularjs/pt-br.js"></script>
+	<script type="text/javascript" src="_lib/third/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src='views/login/Login.js'></script>
+	<script type="text/javascript" src='views/menu/Menu.js'></script>
+	<script type="text/javascript" src='views/protocolo/Protocolo.js'></script>
+
+	<script type="text/javascript">
+		'use strict';
+
+		angular.module('SAC', [
+			'ngRoute',
+			'ui.mask', 
+			'Login', 
+			'Menu',
+			'Protocolo'
+			])
+		.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+			$locationProvider.html5Mode(false);
+			$routeProvider
+			.when('/', {
+				templateUrl: 'views/login/login.html'
+				,controller: 'LoginController'
+				,controllerAs: 'L'
+			})
+			.when('/menu', {
+				templateUrl: 'views/menu/menu.html'
+				,controller: 'MenuController'
+				,controllerAs: 'M'
+			})
+			.when('/menu/protocolo/novo', {
+				templateUrl: 'views/protocolo/protocolo_insert.html'
+				,controller: 'ProtocoloController'
+				,controllerAs: 'P'
+			})
+			.otherwise({redirectTo: '/'});
+		}])
+
+		.controller('IndexController', IndexController);
+		function IndexController () {
+			let vm = this;
+		}
+
+		// Configuração Toastr
+		toastr.options = {
+			"closeButton": false,
+			"debug": false,
+			"newestOnTop": false,
+			"progressBar": false,
+			"positionClass": "toast-top-right",
+			"preventDuplicates": false,
+			"onclick": null,
+			"showDuration": "300",
+			"hideDuration": "1000",
+			"timeOut": "5000",
+			"extendedTimeOut": "1000",
+			"showEasing": "swing",
+			"hideEasing": "linear",
+			"showMethod": "fadeIn",
+			"hideMethod": "fadeOut"
+		}
+
+		// Função "Carregando"
+		function Loading(tp) {
+			if (tp === true) {
+				var vHtml = ""+
+				"<div id='ldi' style='width:100%; height:100%; position:fixed; z-index:999; margin-top:-22px;'>"+
+				"  <center><img style='width:90px; margin-top:150px;' src='_lib/img/sys/loading.gif' /></center>"+
+				"</div>";
+				$("body").prepend(vHtml);
+			} else {
+				$("#ldi").remove();
+			}
+		}
+
+		function lpad(num, size) {
+		    var s = num+"";
+		    while (s.length < size) s = "0" + s;
+		    return s;
+		}
+		
+	</script>
+
+</body>
+</html>

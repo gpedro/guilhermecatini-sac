@@ -1,0 +1,47 @@
+<div class="container" data-ng-init="P.getTecnico()">
+	<div class="row">
+
+	<form name="P.form">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+			<h3>Inclusão de Protocolo</h3>
+			<hr />
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<label>Técnico</label>
+			<select class="form-control" data-ng-model="P.dados.tecnico" data-ng-options="ax.codigo as ax.nome for ax in P.Tecnico">
+			</select>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<label>Situação</label>
+			<select class="form-control" data-ng-model="P.dados.situacao">
+				<option value="A">Aberto</option>
+				<option value="B">Baixado</option>
+				<option value="C">Cancelado</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<label>Prioridade</label>
+			<select class="form-control" data-ng-model="P.dados.prioridade">
+				<option value="1">Alta</option>
+				<option value="2">Média</option>
+				<option value="3">Baixa</option>
+			</select>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<label>Descrição</label>
+			<textarea required="" class="form-control" style="height:200px;" name="descricao" data-ng-model="P.dados.descricao"></textarea>
+			<p style="font-weight:bold; color:red;" data-ng-show="P.form.descricao.$error.required && !P.form.descricao.$pristine">Campo Obrigatório</p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<hr />
+		</div>
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<p><button data-ng-disabled="P.form.$invalid" type="button" class="btn btn-primary btn-block" data-ng-click="P.Insert(P.dados)">Incluir</button></p>
+		</div>
+		<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+			<p><a href="#/menu/protocolo/listar" class="btn btn-default btn-block">Voltar</a></p>
+		</div>
+	</form>
+
+	</div>
+</div>

@@ -1,0 +1,37 @@
+<div class="container" data-ng-init="P.getAll()">
+	<div class="row">
+	<form name="P.form">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+			<h3>Relatório de Protocolos</h3>
+			<hr />
+		</div>
+
+		<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+			<p><a data-ng-disabled="P.form.$invalid" href="#/menu/protocolo/novo" class="btn btn-primary btn-block">Novo</a>
+		</div>
+
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<table class="table table-bordered table-hover table-striped">
+				<thead>
+					<tr>
+						<th>Protocolo</th>
+						<th>Técnico</th>
+						<th>Prioridade</th>
+						<th>Descrição</th>
+						<th>Situação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr data-ng-repeat="aux in P.ax_rel">
+						<td><a href="#/menu/protocolo/alterar/{{aux.sequencia}}">{{aux.sequencia_string}}</a></td>
+						<td>{{aux.tecnico}} - {{aux.tecnico_nome}}</td>
+						<td>{{aux.prioridade}}</td>
+						<td>{{aux.descricao}}</td>
+						<td>{{aux.status}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</form>
+</div>

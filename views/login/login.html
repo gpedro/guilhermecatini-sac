@@ -1,0 +1,55 @@
+<style type="text/css">
+    @media (max-width: 500px) {
+        .tamanho_logo {
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+
+</style>
+
+<section id="logo" >
+    <!--<a href="#"><img src="../_lib/img/logo.png" alt="" /></a>-->
+    <!--<a href="#"><img style="width: 250px;" src="http://c67300e521e7a2b15450-906e86069d164c406e46c2f77f3d71f7.r87.cf2.rackcdn.com/logo_lacoste.jpg" alt="" /></a>-->
+    <a href="#/"><img style="height: 170px;" class="tamanho_logo" src="_lib/img/sys/SAC.png" alt="" /></a>
+    <!--<a href="#/"><img style="width: 150px;" src="_lib/img/cli/logo_branco.png" alt="" /></a>-->
+</section>
+
+
+
+<section class="container" data-ng-controller="LoginController">
+    <section class="row">
+        <form method="post" autocomplete="off" name="L.form" role="login">
+            <div class="form-group">
+                <input type="text" class="form-control" name='usuario' data-ng-model='L.usuario'  placeholder="Entre com seu usuário"  required="" ng-minlength='4'/>
+                <span class="glyphicon glyphicon-user"></span>
+                <p style="color:red; font-weight: bold;" ng-show="L.form.usuario.$error.required && ! L.form.usuario.$pristine">Usuário é Obrigatório</p>
+                <p style="color:red; font-weight: bold;" ng-show="L.form.usuario.$error.minlength && ! L.form.usuario.$pristine">Usuário deve conter no mínimo 4 caracteres</p>
+            </div>
+
+            <div class="form-group">
+                <input type="password" class="form-control" name='senha' data-ng-model='L.senha' placeholder="Entre com sua senha" required="" ng-minlength='4'  />
+                <span class="glyphicon glyphicon-lock"></span>
+                <p style="color:red; font-weight: bold;" ng-show="L.form.senha.$error.required && ! L.form.senha.$pristine">Senha é Obrigatório</p>
+                <p style="color:red; font-weight: bold;" ng-show="L.form.senha.$error.minlength && ! L.form.senha.$pristine">Senha deve conter no mínimo 4 caracteres</p>
+            </div>
+
+            <div class="form-group">
+                <input type="checkbox" name="remember" value="1" /> Manter Conectado
+            </div>
+            <button data-ng-disabled='L.form.$invalid || L.btnLogin' data-ng-click='L.fazerLogin();' type="button" class="btn btn-block btn-primary">Login</button>
+            <section>
+                <p><a href="#/">Esqueceu sua senha?</a></p>
+            </section>
+            <section>
+                
+            </section>
+            <section hidden="" id="erroLogin">
+                <span style="color:#B52828; font-weight: bold; font-size: 16px;">Falha ao efetuar o login. Verifique seu usuário e senha.</span>
+            </section>
+        </form>
+    </section>
+</section>
+
+<link href="views/login/dashboard.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="views/login/styles.css" />
