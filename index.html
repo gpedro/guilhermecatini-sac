@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br" data-ng-app="SAC">
 <head>
-	<base href="/SAC/">
+	<base href="/">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Dike System's</title>
@@ -9,13 +9,14 @@
 	<link href="http://fonts.googleapis.com/css?family=Lato:100italic,100,300italic,300,400italic,400,700italic,700,900italic,900" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="_lib/third/toastr/toastr.min.css">
 </head>
-<body data-ng-controller="IndexController">
+<body>
 
-	<div data-ng-view></div>
+	<div data-ui-view></div>
 
 	<script type="text/javascript" src="_lib/third/js/angularjs/angular.min.js"></script>
 	<script type="text/javascript" src="_lib/third/js/angularjs/angular-route.js"></script>
 	<script type="text/javascript" src="_lib/third/js/angularjs/angular-animate.js"></script>
+	<script type="text/javascript" src="_lib/third/js/angularui/angular-ui-router.js"></script>
 	<script type="text/javascript" src="_lib/third/js/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="_lib/third/toastr/toastr.min.js"></script>
 	<script type="text/javascript" src="_lib/third/js/angularui/mask.js"></script>
@@ -29,37 +30,80 @@
 		'use strict';
 
 		angular.module('SAC', [
-			'ngRoute',
-			'ui.mask', 
-			'Login', 
+			'ui.router',
+			'ui.mask',
+			'Login',
 			'Menu',
 			'Protocolo'
 			])
-		.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+		.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
 			$locationProvider.html5Mode(false);
-			$routeProvider
-			.when('/', {
-				templateUrl: 'views/login/login.html'
-				,controller: 'LoginController'
-				,controllerAs: 'L'
-			})
-			.when('/menu', {
-				templateUrl: 'views/menu/menu.html'
-				,controller: 'MenuController'
-				,controllerAs: 'M'
-			})
-			.when('/menu/protocolo/novo', {
-				templateUrl: 'views/protocolo/protocolo_insert.html'
-				,controller: 'ProtocoloController'
-				,controllerAs: 'P'
-			})
-			.otherwise({redirectTo: '/'});
-		}])
 
-		.controller('IndexController', IndexController);
-		function IndexController () {
-			let vm = this;
-		}
+			// .otherwise({redirectTo: '/'});
+			$urlRouterProvider.otherwise('/');
+
+			$stateProvider
+				/*
+				.when('/', {
+					templateUrl: 'views/login/login.html'
+					,controller: 'LoginController'
+					,controllerAs: 'L'
+				})
+				*/
+		    .state('login', {
+		      url: '/'
+					, templateUrl: 'views/login/login.html'
+					, controller: 'LoginController as L'
+		    })
+				/*
+				.when('/menu', {
+					templateUrl: 'views/menu/menu.html'
+					,controller: 'MenuController'
+					,controllerAs: 'M'
+				})
+				*/
+		    .state('painel', {
+		      url: '/menu'
+					, templateUrl: 'views/menu/menu.html'
+					, controller: 'MenuController as M'
+		    })
+				/*
+				.when('/menu/protocolo/novo', {
+					templateUrl: 'views/protocolo/protocolo_insert.html'
+					,controller: 'ProtocoloController'
+					,controllerAs: 'P'
+				})
+				*/
+		    .state('painel.protocolo-novo', {
+		      url: '/menu/protocolo/novo'
+					, templateUrl: 'views/protocolo/protocolo_insert.html'
+					, controller: 'ProtocoloController as P'
+		    })
+				/*
+				.when('/menu/protocolo/listar', {
+					templateUrl: 'views/protocolo/protocolo_listar.html'
+					,controller: 'ProtocoloController'
+					,controllerAs: 'P'
+				})
+				*/
+		    .state('painel.protocolo-listar', {
+		      url: '/menu/protocolo/listar'
+					, templateUrl: 'views/protocolo/protocolo_listar.html'
+					, controller: 'ProtocoloController as P'
+		    })
+				/*
+				.when('/menu/protocolo/alterar/:sequencia', {
+					templateUrl: 'views/protocolo/protocolo_update.html'
+					,controller: 'ProtocoloController'
+					,controllerAs: 'P'
+				});
+				*/
+		    .state('painel.protocolo-alterar', {
+		      url: '/menu/protocolo/alterar/:sequencia'
+					, templateUrl: 'views/protocolo/protocolo_listar.html'
+					, controller: 'ProtocoloController as P'
+		    })
+		}])
 
 		// Configuração Toastr
 		toastr.options = {
@@ -98,7 +142,7 @@
 		    while (s.length < size) s = "0" + s;
 		    return s;
 		}
-		
+
 	</script>
 
 </body>

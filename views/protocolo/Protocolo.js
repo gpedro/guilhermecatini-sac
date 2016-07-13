@@ -1,30 +1,14 @@
 'use strict';
 
 angular.module('Protocolo', [])
-
-.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-	$locationProvider.html5Mode(false);
-	$routeProvider
-	.when('/menu/protocolo/listar', {
-		templateUrl: 'views/protocolo/protocolo_listar.html'
-		,controller: 'ProtocoloController'
-		,controllerAs: 'P'
-	})
-	.when('/menu/protocolo/alterar/:sequencia', {
-		templateUrl: 'views/protocolo/protocolo_update.html'
-		,controller: 'ProtocoloController'
-		,controllerAs: 'P'
-	})
-	.otherwise({redirectTo: '/'});
-}])
 .controller('ProtocoloController', ProtocoloController);
 
 
-function ProtocoloController($http, $routeParams) {
-	
-	let vm = this;
+function ProtocoloController($http, $stateParams) {
 
-	vm.routeParams = $routeParams;
+	var vm = this;
+
+	vm.routeParams = $stateParams;
 
 	vm.dados = new Object();
 	vm.dados.tecnico = 2;
@@ -129,7 +113,7 @@ function ProtocoloController($http, $routeParams) {
 			} else {
 				toastr["error"]("Protocolo Não Encontrado", "ERRO:");
 			}
-			
+
 			Loading(false);
 		});
 	}
