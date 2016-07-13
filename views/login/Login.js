@@ -7,15 +7,14 @@ angular.module('Login',[])
 
 function LoginController($http, $timeout) {
 
-	let vm = this;
+	var vm = this;
 
 	vm.fazerLogin = fazerLogin;
 	function fazerLogin() {
 		vm.btnLogin = true;
 		Loading(true);
 		vm.btnLogin = false;
-		
-		
+
 		$http.post('controllers/login_controller.php', {'go':'login', 'vm':vm })
 		.success(function(ret) {
 			Loading(false);
